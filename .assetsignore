@@ -1,4 +1,0 @@
-# Files that must not be published as static assets.
-wrangler.toml
-README.md
-.github/
