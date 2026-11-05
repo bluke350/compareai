@@ -55,7 +55,7 @@ window.AFFILIATE_LINKS = {
 
   /* --- AI SEO / visibility analytics --- */
   semrush:     "",   // Semrush — $100–$450/sale, 120-day cookie (Impact)
-  seranking:   "",   // SE Ranking — 30% recurring, 120-day cookie
+  seranking:   "https://seranking.com/?ga=5334938&source=link",   // SE Ranking — 30% recurring, 120-day cookie
   frase:       "",   // Frase — 30% recurring, 12 months, 60-day cookie
   ahrefs:      "",   // no public program — leave empty
   otterly:     ""    // no program — leave empty
