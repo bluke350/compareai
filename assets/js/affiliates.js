@@ -37,7 +37,7 @@ window.AFFILIATE_LINKS = {
   /* --- AI video --- */
   synthesia:   "",   // Synthesia — 25% recurring, 12 months, 90-day cookie
   heygen:      "",   // HeyGen — 20% recurring, 12 months, 30-day cookie
-  invideo:     "",   // InVideo — reported ~50% first month, confirm
+  invideo:     "https://invideo.sjv.io/WO0aJM",   // InVideo — reported ~50% first month, confirm
   veed:        "",   // VEED — 30% for 12 months
   descript:    "",   // Descript — ~15% per sale, confirm
   opusclip:    "",   // Opus Clip — confirm current terms
