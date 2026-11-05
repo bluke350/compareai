@@ -86,7 +86,7 @@ Cloudflare Pages free plan: 500 builds/month, unlimited requests and bandwidth, 
 ### Notes
 
 - `_headers` sets CSP, nosniff, referrer policy and cache rules. Cloudflare Pages applies it automatically.
-- `_redirects` adds extensionless aliases (`/writing`, `/voice`, …). If your host is configured to strip `.html` and you see a redirect loop, delete `_redirects` — internal links all use the `.html` paths and work regardless.
+- `_redirects` is intentionally **not** included. Cloudflare Pages' automatic HTML handling already serves extensionless paths, and an explicit alias file created a 308/301 loop on `/monetize.html` and `/about.html`. Internal links use the `.html` paths, which work as-is. Add your own aliases only if you move to a host without HTML handling.
 - GitHub Pages works too, but ignores `_headers` and `_redirects`.
 
 ---
@@ -105,7 +105,6 @@ Cloudflare Pages free plan: 500 builds/month, unlimited requests and bandwidth, 
 ├── about.html                 # methodology, disclosure, program legend, changelog
 ├── 404.html
 ├── _headers                   # Cloudflare Pages security + cache headers
-├── _redirects                 # clean URL aliases
 ├── assets/
 │   ├── css/style.css          # design system, dark + light themes
 │   └── js/
