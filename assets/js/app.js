@@ -497,7 +497,9 @@
     var config = window.AFFILIATE_LINKS || {};
     var list = tools();
     var monetizable = list.filter(function (t) { return t.affiliate.status === 'open'; });
-    var live = monetizable.filter(function (t) { return config[t.slug] && /^https?:\/\//i.test(config[t.slug]); });
+    /* Count every configured link, including programs still marked "verify":
+       a working tracking URL proves the link is live even if terms are not. */
+    var live = list.filter(function (t) { return config[t.slug] && /^https?:\/\//i.test(config[t.slug]); });
     var totalLinks = Object.keys(config).length;
 
     $$('[data-aff-live]', monitor).forEach(function (el) { el.textContent = live.length; });
