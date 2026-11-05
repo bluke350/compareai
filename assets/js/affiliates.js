@@ -51,7 +51,14 @@ window.AFFILIATE_LINKS = {
   windsurf:    "",   // reported 20% recurring, confirm
   tabnine:     "",   // Tabnine — 20% recurring, 12 months
   coderabbit:  "",   // CodeRabbit — $30 per qualified lead (Dub)
-  claude:      ""    // no program — leave empty
+  claude:      "",   // no program — leave empty
+
+  /* --- AI SEO / visibility analytics --- */
+  semrush:     "",   // Semrush — $100–$450/sale, 120-day cookie (Impact)
+  seranking:   "",   // SE Ranking — 30% recurring, 120-day cookie
+  frase:       "",   // Frase — 30% recurring, 12 months, 60-day cookie
+  ahrefs:      "",   // no public program — leave empty
+  otterly:     ""    // no program — leave empty
 };
 
 /* Where a button goes when no affiliate link is configured yet.

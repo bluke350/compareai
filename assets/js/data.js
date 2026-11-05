@@ -375,5 +375,72 @@ window.TOOLS = [
     verdict: "Often the best answer, never the one that pays you. Include it and win the reader's trust instead.",
     page: "coding-tools.html",
     affiliate: { program: "None", status: "none", commission: "No public affiliate program", cookie: "—", network: "—", pct: null, months: 0, avgPrice: 20, url: "https://claude.com/", verified: true }
+  },
+
+  /* ------------------------------ SEO / GEO ------------------------------ */
+  {
+    slug: "semrush", name: "Semrush", category: "seo", categoryLabel: "AI SEO",
+    tagline: "SEO data plus AI-visibility tracking",
+    price: "$139/mo", priceNum: 139, planLabel: "Pro, monthly",
+    trial: "7-day free trial", rating: 4.6,
+    bestFor: "Teams that want one platform for rankings and AI citations",
+    highlights: ["AI Visibility Toolkit", "Keyword + backlink data", "$100–$450 per sale"],
+    pros: ["Broadest data set in the category", "AI visibility sits beside classic SEO data", "Highest per-sale affiliate payout here"],
+    cons: ["$139/mo is a real commitment", "Add-on toolkits push the bill higher", "Interface is dense for newcomers"],
+    verdict: "The default for agencies that need one invoice for SEO and AI visibility. It pays affiliates well because it costs a lot — be honest about both.",
+    page: "seo-tools.html",
+    affiliate: { program: "Semrush Affiliate", status: "open", commission: "$100–$450 per sale + $10 per trial", cookie: "120 days", network: "Impact", pct: null, months: 1, avgPrice: 139, flat: 250, url: "https://www.semrush.com/lp/affiliate-program/en/", verified: true }
+  },
+  {
+    slug: "seranking", name: "SE Ranking", category: "seo", categoryLabel: "AI SEO",
+    tagline: "Rank tracking and audits at a lower price",
+    price: "$129/mo", priceNum: 129, planLabel: "Core, monthly",
+    trial: "14-day free trial", rating: 4.4,
+    bestFor: "Agencies tracking thousands of keywords on a budget",
+    highlights: ["4x keywords at a similar price", "120-day cookie", "30% recurring commission"],
+    pros: ["Best keyword-per-dollar in the category", "AI visibility tracking included", "30% on every rebill, 120-day cookie"],
+    cons: ["Backlink index trails Ahrefs", "Reports are less polished", "Upsells for extra projects"],
+    verdict: "The value pick for agencies. The affiliate terms are the best combination here: 30% recurring, 120 days, free to join.",
+    page: "seo-tools.html",
+    affiliate: { program: "SE Ranking Affiliate", status: "open", commission: "30% on every sale and rebill", cookie: "120 days", network: "In-house", pct: 30, months: 12, avgPrice: 129, url: "https://seranking.com/affiliate.html", verified: true }
+  },
+  {
+    slug: "frase", name: "Frase", category: "seo", categoryLabel: "AI SEO",
+    tagline: "SERP and AI-answer briefs on a budget",
+    price: "$49/mo", priceNum: 49, planLabel: "Starter — $39 annual",
+    trial: "7-day trial", rating: 4.2,
+    bestFor: "Content teams that want briefs without Surfer's price",
+    highlights: ["SEO + GEO briefs", "30% recurring, 60-day cookie", "Cheaper than Surfer"],
+    pros: ["Briefs cover AI answers, not just SERPs", "Lowest entry price among serious SEO writers", "30% recurring for 12 months"],
+    cons: ["Optimisation scoring is weaker than Surfer", "Needs more manual research", "Smaller integrations list"],
+    verdict: "The budget alternative to Surfer. It will not out-optimise it, but at $39–$49 it earns its place on the shortlist.",
+    page: "seo-tools.html",
+    affiliate: { program: "Frase Affiliate", status: "open", commission: "30% recurring, 12 months (35–40% at volume)", cookie: "60 days", network: "FirstPromoter", pct: 30, months: 12, avgPrice: 39, url: "https://www.frase.io/partners/affiliates", verified: true }
+  },
+  {
+    slug: "ahrefs", name: "Ahrefs", category: "seo", categoryLabel: "AI SEO",
+    tagline: "The backlink and technical data benchmark",
+    price: "$99/mo", priceNum: 99, planLabel: "Lite, monthly",
+    trial: "No free trial", rating: 4.7,
+    bestFor: "Link building and technical audits",
+    highlights: ["Best backlink index", "Brand Radar for AI visibility", "Site audit depth"],
+    pros: ["Data quality is the reference point", "Brand Radar tracks AI citations", "Cheaper Lite tier than before"],
+    cons: ["No public affiliate program — it was discontinued", "Credit limits on newer plans", "Rank tracking costs extra"],
+    verdict: "Still the tool SEOs trust most, and still a dead end for affiliates. Include it so the page reads as a comparison, not a sales sheet.",
+    page: "seo-tools.html",
+    affiliate: { program: "None", status: "none", commission: "Public program discontinued; no plans to relaunch", cookie: "—", network: "—", pct: null, months: 0, avgPrice: 99, url: "https://ahrefs.com/", verified: true }
+  },
+  {
+    slug: "otterly", name: "Otterly.ai", category: "seo", categoryLabel: "AI Visibility",
+    tagline: "Brand citation tracking in AI answers",
+    price: "$29/mo", priceNum: 29, planLabel: "Lite — 15 prompts",
+    trial: "Free trial", rating: 4.1,
+    bestFor: "Small brands starting to track AI citations",
+    highlights: ["Cheapest AI-visibility tracker", "4 engines on Lite", "Sentiment + citation analysis"],
+    pros: ["Lowest entry price for AI visibility", "Clear citation-source reporting", "Good fit for a first GEO test"],
+    cons: ["15 prompts is a small allowance", "No affiliate program", "Agency partnership requires a paid plan"],
+    verdict: "The cheapest way to find out whether ChatGPT mentions you. No affiliate angle, so link it for trust.",
+    page: "seo-tools.html",
+    affiliate: { program: "None", status: "none", commission: "No affiliate program; agency partner needs paid plan", cookie: "—", network: "—", pct: null, months: 0, avgPrice: 29, url: "https://otterly.ai/", verified: false }
   }
 ];

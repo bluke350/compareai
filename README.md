@@ -2,7 +2,9 @@
 
 A static, multi-page AI tool comparison site with real affiliate plumbing. No framework, no build step, no dependencies, no trackers. Clone it, paste your affiliate links into one file, deploy free on Cloudflare Pages.
 
-**Live pages:** homepage, 5 category comparisons (27 tools), monetization hub, methodology/disclosure, 404.
+**Live pages:** homepage, 6 category comparisons (32 tools), 3 buyer guides, monetization hub, methodology/disclosure, 404.
+
+**Live site:** https://compareai-e9i.pages.dev · **Repo:** https://github.com/bluke350/compareai
 
 ---
 
@@ -36,13 +38,27 @@ Reload. Every `data-aff="jasper"` link now points at your URL. Nothing else to c
 
 Empty entries are safe: the link falls back to the vendor's own site and keeps `rel="sponsored noopener"`, so no button ever dead-ends.
 
-The status panel at the top of `monetize.html` shows how many of the 13 open programs you have configured.
+The status panel at the top of `monetize.html` shows how many of the 16 open programs you have configured.
 
 ---
 
 ## Deploy free: GitHub + Cloudflare Pages
 
-### Option A — Git integration (recommended)
+### This repo: auto-deploy status
+
+The live `compareai` project was created as a **Direct Upload** project, and Cloudflare does not allow converting one to Git (`8000069`). So this repo deploys through `.github/workflows/deploy.yml` on every push to `main` instead. It needs one repository secret:
+
+1. Cloudflare dashboard → **My Profile → API Tokens → Create Token → Custom token**
+2. Permission: **Account → Cloudflare Pages → Edit**; Account resources: your account
+3. Create, then copy the token (shown once)
+4. GitHub repo → **Settings → Secrets and variables → Actions → New repository secret**
+5. Name `CLOUDFLARE_API_TOKEN`, paste the value, save
+
+Until the secret exists the workflow runs but skips the deploy with a warning. Once it exists, every push to `main` publishes to https://compareai-e9i.pages.dev. Use **Actions → Deploy to Cloudflare Pages → Run workflow** for the first run.
+
+The alternative is a *new* Git-connected Pages project in the dashboard (Workers & Pages → Create → Pages → Connect to Git). That gives true dashboard Git integration but a different `*.pages.dev` URL, because an existing direct-upload project cannot be attached to a repo.
+
+### Option A — Git integration (new projects)
 
 ```bash
 git init
@@ -101,14 +117,19 @@ Cloudflare Pages free plan: 500 builds/month, unlimited requests and bandwidth, 
 ├── video-tools.html           # 6 tools
 ├── voice-tools.html           # 4 tools
 ├── coding-tools.html          # 6 tools
+├── seo-tools.html             # 5 tools: Semrush, SE Ranking, Frase, Ahrefs, Otterly
+├── jasper-vs-writesonic.html  # buyer guide
+├── synthesia-vs-heygen.html   # buyer guide
+├── elevenlabs-vs-murf.html    # buyer guide
 ├── monetize.html              # program directory, earnings calc, setup, deploy
 ├── about.html                 # methodology, disclosure, program legend, changelog
 ├── 404.html
+├── .github/workflows/deploy.yml  # push-to-deploy workflow
 ├── _headers                   # Cloudflare Pages security + cache headers
 ├── assets/
 │   ├── css/style.css          # design system, dark + light themes
 │   └── js/
-│       ├── data.js            # 27-tool dataset (pricing, pros/cons, program terms)
+│       ├── data.js            # 32-tool dataset (pricing, pros/cons, program terms)
 │       ├── affiliates.js      # ← YOUR LINKS GO HERE
 │       └── app.js             # all behaviour
 └── README.md
@@ -122,7 +143,7 @@ Cloudflare Pages free plan: 500 builds/month, unlimited requests and bandwidth, 
 |---|---|
 | Affiliate links | `data-aff` attributes resolved from `AFFILIATE_LINKS` at load; safe fallback when unset |
 | Compare tray | Pick up to 3 tools on any page, side-by-side dialog, persists in `localStorage` |
-| Search | Homepage searches all 27 tools by name, category, tagline, feature |
+| Search | Homepage searches all 32 tools by name, category, tagline, feature |
 | Filters / sorting | Category chips + price/score/A–Z sorting, per page |
 | Cost calculators | Per-seat, per-month annual cost estimates from real entry prices |
 | Earnings calculator | Commission-window math per program, with honest caveats |
