@@ -1,0 +1,9 @@
+name = "compareai"
+pages_build_output_dir = "."
+compatibility_date = "2026-11-01"
+
+# Click counters for functions/api/click.js and functions/api/stats.js.
+# Created 5 Nov 2026; free plan allows 1,000 writes/day.
+[[kv_namespaces]]
+binding = "CLICKS"
+id = "1d2836f89b3444ad87762ef81aa5644a"

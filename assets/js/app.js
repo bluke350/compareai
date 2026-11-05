@@ -126,6 +126,30 @@
   }
 
   /* ------------------------- Affiliate resolution ------------------------ */
+  function trackAffiliateClick(a) {
+    try {
+      if (!/^https?:$/.test(window.location.protocol)) return;
+      var slug = a.getAttribute('data-aff');
+      var t = bySlug(slug);
+      var body = JSON.stringify({
+        s: slug,
+        c: t ? t.category : '',
+        p: window.location.pathname,
+        st: a.getAttribute('data-aff-status') || ''
+      });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon('/api/click', new Blob([body], { type: 'application/json' }));
+      } else if (window.fetch) {
+        fetch('/api/click', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: body,
+          keepalive: true
+        }).catch(function () { /* a lost count must never block the click */ });
+      }
+    } catch (e) { /* ignore */ }
+  }
+
   function wireAffiliates() {
     var config = window.AFFILIATE_LINKS || {};
     $$('a[data-aff]').forEach(function (a) {
@@ -144,6 +168,12 @@
       }
       a.setAttribute('target', '_blank');
       a.setAttribute('rel', 'sponsored noopener');
+
+      if (!a.dataset.affTracked) {
+        a.dataset.affTracked = '1';
+        a.addEventListener('click', function () { trackAffiliateClick(a); });
+        a.addEventListener('auxclick', function (e) { if (e.button === 1) trackAffiliateClick(a); });
+      }
     });
   }
   wireAffiliates();

@@ -1,6 +1,6 @@
 # CompareAI
 
-A static, multi-page AI tool comparison site with real affiliate plumbing. No framework, no build step, no dependencies, no trackers. Clone it, paste your affiliate links into one file, deploy free on Cloudflare Pages.
+A static, multi-page AI tool comparison site with real affiliate plumbing. No framework, no build step, no dependencies, no third-party trackers. Clone it, paste your affiliate links into one file, deploy free on Cloudflare Pages.
 
 **Live pages:** homepage, 6 category comparisons (32 tools), 3 buyer guides, monetization hub, methodology/disclosure, 404.
 
@@ -39,6 +39,24 @@ Reload. Every `data-aff="jasper"` link now points at your URL. Nothing else to c
 Empty entries are safe: the link falls back to the vendor's own site and keeps `rel="sponsored noopener"`, so no button ever dead-ends.
 
 The status panel at the top of `monetize.html` shows how many of the 16 open programs you have configured.
+
+---
+
+## Click tracking (built in)
+
+Every click on a `data-aff` button is counted first-party and stored in Cloudflare KV — aggregate only, no cookies, no IP addresses, no third-party analytics.
+
+- `functions/api/click.js` — receives the beacon and increments `t:<slug>`
+- `functions/api/stats.js` — returns per-tool and per-category totals, gated by `STATS_KEY`
+- `clicks.html` — private dashboard (`noindex`, not in the nav)
+
+Set the key once, then open `/clicks` and paste it (it stays in that browser tab only):
+
+```bash
+printf '%s' 'a-long-random-key' | npx wrangler pages secret put STATS_KEY --project-name compareai
+```
+
+The KV binding lives in `wrangler.toml`. The free plan allows 1,000 writes/day and a click costs one write. Delete this section's files if you would rather count nothing.
 
 ---
 
@@ -124,6 +142,10 @@ Cloudflare Pages free plan: 500 builds/month, unlimited requests and bandwidth, 
 ├── monetize.html              # program directory, earnings calc, setup, deploy
 ├── about.html                 # methodology, disclosure, program legend, changelog
 ├── 404.html
+├── clicks.html                # private dashboard for click counts
+├── functions/api/click.js     # counts one outbound click in KV
+├── functions/api/stats.js     # aggregated counts, STATS_KEY required
+├── wrangler.toml              # KV binding for the Functions
 ├── .github/workflows/deploy.yml  # push-to-deploy workflow
 ├── _headers                   # Cloudflare Pages security + cache headers
 ├── assets/
@@ -131,7 +153,8 @@ Cloudflare Pages free plan: 500 builds/month, unlimited requests and bandwidth, 
 │   └── js/
 │       ├── data.js            # 32-tool dataset (pricing, pros/cons, program terms)
 │       ├── affiliates.js      # ← YOUR LINKS GO HERE
-│       └── app.js             # all behaviour
+│       ├── app.js             # all behaviour
+│       └── clicks.js          # dashboard logic
 └── README.md
 ```
 
@@ -149,6 +172,7 @@ Cloudflare Pages free plan: 500 builds/month, unlimited requests and bandwidth, 
 | Earnings calculator | Commission-window math per program, with honest caveats |
 | Theme | Dark/light, persisted |
 | Monetization monitor | Live count of configured links on `monetize.html` |
+| Click stats | First-party KV counters per tool and category, private dashboard at `/clicks` |
 | Deep links | `writing-tools.html#jasper` scrolls to and highlights the card |
 
 Everything is progressive: if JavaScript fails, the pages still render, tables still read, and links still go to the right vendor.

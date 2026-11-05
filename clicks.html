@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Click stats — CompareAI (private)</title>
+<meta name="description" content="Private dashboard: which tools and categories get the most outbound affiliate clicks.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#070a10">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%235eead4'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='18' font-weight='bold' text-anchor='middle' fill='%23052b26'%3EC%3C/text%3E%3C/svg%3E">
+<script src="assets/js/data.js"></script>
+<script src="assets/js/clicks.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html" aria-label="CompareAI home"><span class="brand-mark" aria-hidden="true">C</span><span>CompareAI<small>click stats</small></span></a>
+    <div class="nav-actions">
+      <a class="btn btn--sm" href="monetize.html">← Monetize</a>
+      <a class="btn btn--sm btn--ghost" href="index.html">View site</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="container">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> <span>/</span> <span>Click stats</span></nav>
+      <h1>Which buttons people actually press</h1>
+      <p class="lede">Every outbound affiliate click is counted on Cloudflare and grouped by tool and category. This page is not linked from the site navigation and is marked <code>noindex</code>. You need the stats key to read it.</p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="card" id="statsKeyPanel">
+      <h2 style="margin-top:0">Enter your stats key</h2>
+      <p class="small muted">The key is the <code>STATS_KEY</code> secret on your Pages project. It stays in this browser tab only — never in the page source.</p>
+      <form id="statsKeyForm" style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
+        <label class="sr-only" for="statsKey">Stats key</label>
+        <input id="statsKey" type="password" autocomplete="off" spellcheck="false" placeholder="Paste stats key" style="flex:1;min-width:220px;padding:.6rem .7rem;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--text)">
+        <button class="btn btn--primary" type="submit">Open dashboard</button>
+      </form>
+      <p class="tiny" id="statsError" role="alert" style="color:var(--danger,#ff8a8a);margin:.6rem 0 0"></p>
+      <p class="tiny muted" style="margin:.9rem 0 0">Lost the key? Set a new one with <code>wrangler pages secret put STATS_KEY --project-name compareai</code>.</p>
+    </div>
+
+    <div id="statsDash" hidden>
+      <div class="stat-grid">
+        <div class="stat stat--accent"><strong id="statTotal">0</strong><span>Total clicks</span></div>
+        <div class="stat"><strong id="statTools">0</strong><span>Tools clicked</span></div>
+        <div class="stat"><strong id="statCategory">—</strong><span>Top category</span></div>
+        <div class="stat"><strong id="statLast">—</strong><span>Last click</span></div>
+      </div>
+
+      <div class="section-head" style="margin-top:2rem">
+        <div>
+          <span class="eyebrow">By tool</span>
+          <h2>Clicks per tool</h2>
+          <p>Sorted by clicks. Counting started <span id="statsSince">—</span>. <span id="statsStatus" class="tiny muted"></span></p>
+        </div>
+        <div style="display:flex;gap:.5rem">
+          <button class="btn btn--sm" type="button" id="statsRefresh">Refresh</button>
+          <button class="btn btn--sm btn--ghost" type="button" id="statsForget">Forget key</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="compare prog-table">
+          <thead><tr><th scope="col">Tool</th><th scope="col">Category</th><th scope="col">Clicks</th><th scope="col">Share</th><th scope="col">Last click</th></tr></thead>
+          <tbody id="toolRows"></tbody>
+        </table>
+      </div>
+
+      <div class="section-head" style="margin-top:2.2rem">
+        <div><span class="eyebrow">By category</span><h2>Where demand sits</h2></div>
+      </div>
+      <div class="table-wrap">
+        <table class="compare prog-table">
+          <thead><tr><th scope="col">Category</th><th scope="col">Clicks</th><th scope="col">Share</th></tr></thead>
+          <tbody id="catRows"></tbody>
+        </table>
+      </div>
+
+      <p class="tiny muted" style="margin-top:1rem">Counts are aggregate only: no cookies, no IP addresses, no user identifiers. A click is recorded whether the button points at a live affiliate link or the vendor fallback — use the <code>data-aff-status</code> marker in <code>app.js</code> if you later want to split those.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> CompareAI. Private page — not indexed.</span>
+      <span>First-party counts, stored in Cloudflare KV.</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
