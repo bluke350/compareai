@@ -1,0 +1,9 @@
+# Clean aliases. Internal links use the .html paths and work without these.
+/writing    /writing-tools.html    301
+/image      /image-generators.html 301
+/video      /video-tools.html      301
+/voice      /voice-tools.html      301
+/coding     /coding-tools.html     301
+/monetize   /monetize.html         301
+/about      /about.html            301
+/home       /index.html            301
