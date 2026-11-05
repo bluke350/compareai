@@ -11,6 +11,7 @@
 <script src="assets/js/data.js"></script>
 <script src="assets/js/affiliates.js"></script>
 <script src="assets/js/app.js" defer></script>
+<script src="assets/js/linkbuilder.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -46,6 +47,7 @@
         <a class="btn btn--primary" href="#directory">Browse the 16 open programs</a>
         <a class="btn" href="#calculator">Estimate earnings</a>
         <a class="btn" href="#setup">Set it up in 3 steps</a>
+        <a class="btn" href="#builder">Build your config</a>
       </div>
       <div class="disclosure">
         <span aria-hidden="true">ⓘ</span>
@@ -154,6 +156,29 @@
         </div>
         <p class="tiny muted" style="margin-top:.7rem">Empty entries are safe: the link resolves to the vendor's own site, tagged <code>rel="sponsored noopener"</code>. No broken buttons, no fake links.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="container section" id="builder">
+    <div class="section-head">
+      <div><span class="eyebrow">Link builder</span><h2>Paste your tracking URLs, copy the file</h2>
+        <p>Fill in whatever you have been approved for. The output below is a complete replacement for <code>assets/js/affiliates.js</code> — empty fields stay empty and fall back to the vendor site, so nothing breaks.</p></div>
+    </div>
+    <div data-link-builder>
+      <div class="lb-bar">
+        <button class="btn btn--sm btn--primary" type="button" data-lb-copy>Copy config</button>
+        <button class="btn btn--sm" type="button" data-lb-reset>Reset to current file</button>
+        <span class="tiny muted" data-lb-count aria-live="polite"></span>
+      </div>
+      <div data-lb-fields></div>
+      <div class="section-head" style="margin-top:1.4rem">
+        <div><span class="eyebrow">Output</span><h3 style="margin:.2rem 0 0">Your affiliates.js</h3></div>
+      </div>
+      <div class="code-block">
+        <pre id="lbSnippet" style="margin:0"><code data-lb-output></code></pre>
+      </div>
+      <p class="tiny muted" style="margin-top:.7rem">Select all of <code>assets/js/affiliates.js</code>, paste this over it and save. The status panel above then counts your live links.</p>
+      <p class="tiny" data-lb-status role="status" aria-live="polite" style="margin-top:.4rem"></p>
     </div>
   </section>
 

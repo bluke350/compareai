@@ -36,6 +36,8 @@ window.AFFILIATE_LINKS = {
 
 Reload. Every `data-aff="jasper"` link now points at your URL. Nothing else to change — no HTML edits, no rebuild.
 
+Prefer a form? Open `monetize.html#builder`, paste your tracking URLs and copy the generated file — it writes this whole config for you, with validation.
+
 Empty entries are safe: the link falls back to the vendor's own site and keeps `rel="sponsored noopener"`, so no button ever dead-ends.
 
 The status panel at the top of `monetize.html` shows how many of the 16 open programs you have configured.

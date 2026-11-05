@@ -10,6 +10,9 @@
    3. Paste it below, save, reload. Every "Visit" button on the site now
       points at your link, and the affiliate disclosure stays accurate.
 
+   Shortcut: monetize.html#builder generates this whole file from pasted
+   tracking URLs, so you can copy the result instead of editing by hand.
+
    Before you paste: strip nothing. Use the exact URL the network gave you.
    Sub-IDs / campaign parameters are supported on most networks, e.g.
         https://elevenlabs.io/?affiliate_id=abc&utm_content=voice-page
