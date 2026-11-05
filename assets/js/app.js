@@ -167,7 +167,12 @@
         a.setAttribute('data-aff-status', 'fallback');
       }
       a.setAttribute('target', '_blank');
-      a.setAttribute('rel', 'sponsored noopener');
+      /* "sponsored" is only accurate when money can change hands. Vendor
+         fallbacks (no link configured, or no/closed program) get plain
+         noopener so the markup does not claim a relationship that is absent. */
+      var monetized = a.getAttribute('data-aff-status') === 'live' ||
+        a.getAttribute('data-aff-status') === 'program';
+      a.setAttribute('rel', monetized ? 'sponsored noopener' : 'noopener');
 
       if (!a.dataset.affTracked) {
         a.dataset.affTracked = '1';
