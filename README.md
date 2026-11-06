@@ -220,6 +220,8 @@ The site is a static multi-page build, so the SEO surface is files in the repo r
 - **Canonicals** — every indexable page declares an absolute canonical. All of them, plus `og:url`, the JSON-LD `url`/`item` values and the sitemap, use the base `https://compareai.wildbillsproplans.com`, which is the custom domain attached to the Pages project. `compareai-e9i.pages.dev` still serves the site but canonicalises to the domain. If the domain ever changes, replace that one base in the HTML heads, `sitemap.xml`, `robots.txt` and this file before deploying.
 - **Structured data** — `Organization` + `WebSite` on the home page, `BreadcrumbList` on every page with crumbs, `ItemList` on the six category pages, `FAQPage` generated from the visible `<details>` blocks, `AboutPage` on about, `Article` on the three guides.
 - **Social cards** — one shared 1200×630 `assets/img/og.png` is referenced by `og:image` and `twitter:image`.
+- **Icons** — `assets/img/favicon.svg` + `.ico` and `apple-touch-icon.png` are linked from every page (no inline data URIs).
+- **Routing** — `_routes.json` limits Pages Functions to `/api/*`, so static pages are served straight from the edge instead of invoking the Worker.
 - **Noindex** — `404.html` and `clicks.html` carry `noindex` meta; `/clicks` and `/api/*` also send `X-Robots-Tag`.
 
 Cloudflare Pages 308-redirects `/writing-tools.html` to `/writing-tools`, so the extensionless URL is the canonical one. Internal links, canonicals, `og:url`, JSON-LD `url` values and the sitemap all use it — linking to `.html` directly would put a redirect in front of every visit.
