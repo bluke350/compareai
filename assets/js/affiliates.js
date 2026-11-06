@@ -35,7 +35,7 @@ window.AFFILIATE_LINKS = {
   leonardo:    "",   // program closed April 2026
 
   /* --- AI video --- */
-  synthesia:   "",   // Synthesia — 25% recurring, 12 months, 90-day cookie
+  synthesia:   "https://www.synthesia.io/?via=william-luke",   // Synthesia — 25% recurring, 12 months, 90-day cookie
   heygen:      "",   // HeyGen — 20% recurring, 12 months, 30-day cookie
   invideo:     "https://invideo.sjv.io/WO0aJM",   // InVideo — reported ~50% first month, confirm
   veed:        "",   // VEED — 30% for 12 months
