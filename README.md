@@ -46,7 +46,7 @@ The status panel at the top of `monetize.html` shows how many of the 16 open pro
 
 ## Click tracking (built in)
 
-Every click on a `data-aff` button is counted first-party and stored in Cloudflare KV — aggregate only, no cookies, no IP addresses, no third-party analytics.
+Every click on a `data-aff` button is counted first-party and stored in Cloudflare KV — aggregate only, no cookies, no IP addresses. Microsoft Clarity is loaded in the `<head>` of the 13 public pages for session replays and heatmaps; `clicks.html` (its URL carries `?key=`) and `404.html` are deliberately excluded. Clarity is third-party and sets its own cookies, which the about and monetize pages disclose.
 
 - `functions/api/click.js` — receives the beacon and increments `t:<slug>`
 - `functions/api/stats.js` — returns per-tool and per-category totals, gated by `STATS_KEY`
