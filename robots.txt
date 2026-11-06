@@ -1,4 +1,4 @@
-# CompareAI — https://compareai-e9i.pages.dev
+# CompareAI — https://compareai.wildbillsproplans.com
 User-agent: *
 Allow: /
 
@@ -6,4 +6,4 @@ Allow: /
 Disallow: /api/
 Disallow: /clicks
 
-Sitemap: https://compareai-e9i.pages.dev/sitemap.xml
+Sitemap: https://compareai.wildbillsproplans.com/sitemap.xml

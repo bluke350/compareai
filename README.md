@@ -4,7 +4,7 @@ A static, multi-page AI tool comparison site with real affiliate plumbing. No fr
 
 **Live pages:** homepage, 6 category comparisons (32 tools), 3 buyer guides, monetization hub, methodology/disclosure, 404.
 
-**Live site:** https://compareai-e9i.pages.dev · **Repo:** https://github.com/bluke350/compareai
+**Live site:** https://compareai.wildbillsproplans.com · **Repo:** https://github.com/bluke350/compareai
 
 ---
 
@@ -74,7 +74,7 @@ The live `compareai` project was created as a **Direct Upload** project, and Clo
 4. GitHub repo → **Settings → Secrets and variables → Actions → New repository secret**
 5. Name `CLOUDFLARE_API_TOKEN`, paste the value, save
 
-Until the secret exists the workflow runs but skips the deploy with a warning. Once it exists, every push to `main` publishes to https://compareai-e9i.pages.dev. Use **Actions → Deploy to Cloudflare Pages → Run workflow** for the first run.
+Until the secret exists the workflow runs but skips the deploy with a warning. Once it exists, every push to `main` publishes to https://compareai.wildbillsproplans.com. Use **Actions → Deploy to Cloudflare Pages → Run workflow** for the first run.
 
 The alternative is a *new* Git-connected Pages project in the dashboard (Workers & Pages → Create → Pages → Connect to Git). That gives true dashboard Git integration but a different `*.pages.dev` URL, because an existing direct-upload project cannot be attached to a repo.
 
@@ -217,7 +217,7 @@ The site is a static multi-page build, so the SEO surface is files in the repo r
 
 - `robots.txt` — allows everything except `/api/` and `/clicks`, and points at the sitemap.
 - `sitemap.xml` — the 12 indexable URLs with `lastmod`. Regenerate it whenever a page is added or renamed.
-- **Canonicals** — every indexable page declares an absolute canonical. All of them, plus `og:url`, the JSON-LD `url`/`item` values and the sitemap, use the base `https://compareai-e9i.pages.dev`. If you attach a custom domain, change that one base everywhere (a find/replace over the HTML heads, `sitemap.xml` and `robots.txt`) before deploying.
+- **Canonicals** — every indexable page declares an absolute canonical. All of them, plus `og:url`, the JSON-LD `url`/`item` values and the sitemap, use the base `https://compareai.wildbillsproplans.com`. If you attach a custom domain, change that one base everywhere (a find/replace over the HTML heads, `sitemap.xml` and `robots.txt`) before deploying.
 - **Structured data** — `Organization` + `WebSite` on the home page, `BreadcrumbList` on every page with crumbs, `ItemList` on the six category pages, `FAQPage` generated from the visible `<details>` blocks, `AboutPage` on about, `Article` on the three guides.
 - **Social cards** — one shared 1200×630 `assets/img/og.png` is referenced by `og:image` and `twitter:image`.
 - **Noindex** — `404.html` and `clicks.html` carry `noindex` meta; `/clicks` and `/api/*` also send `X-Robots-Tag`.
