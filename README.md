@@ -210,3 +210,16 @@ Re-check prices before publishing an update; AI tools repriced repeatedly during
 ## Licence / attribution
 
 Content and code in this project are yours to use and modify. Vendor names and logos belong to their owners. Affiliate programs may prohibit brand bidding and income claims — read each program's terms before promoting it.
+
+## SEO baseline
+
+The site is a static multi-page build, so the SEO surface is files in the repo root:
+
+- `robots.txt` — allows everything except `/api/` and `/clicks`, and points at the sitemap.
+- `sitemap.xml` — the 12 indexable URLs with `lastmod`. Regenerate it whenever a page is added or renamed.
+- **Canonicals** — every indexable page declares an absolute canonical. All of them, plus `og:url`, the JSON-LD `url`/`item` values and the sitemap, use the base `https://compareai-e9i.pages.dev`. If you attach a custom domain, change that one base everywhere (a find/replace over the HTML heads, `sitemap.xml` and `robots.txt`) before deploying.
+- **Structured data** — `Organization` + `WebSite` on the home page, `BreadcrumbList` on every page with crumbs, `ItemList` on the six category pages, `FAQPage` generated from the visible `<details>` blocks, `AboutPage` on about, `Article` on the three guides.
+- **Social cards** — one shared 1200×630 `assets/img/og.png` is referenced by `og:image` and `twitter:image`.
+- **Noindex** — `404.html` and `clicks.html` carry `noindex` meta; `/clicks` and `/api/*` also send `X-Robots-Tag`.
+
+Pages are canonicalised with the `.html` extension, which is what internal links and the sitemap use. Extensionless duplicates (`/writing-tools`) therefore consolidate to `/writing-tools.html` via the canonical rather than a redirect.

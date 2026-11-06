@@ -1,0 +1,9 @@
+# CompareAI — https://compareai-e9i.pages.dev
+User-agent: *
+Allow: /
+
+# private endpoints and the click dashboard
+Disallow: /api/
+Disallow: /clicks
+
+Sitemap: https://compareai-e9i.pages.dev/sitemap.xml
