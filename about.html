@@ -146,8 +146,8 @@
   <section class="container section" id="contact">
     <div class="prose" style="max-width:74ch">
       <h2>Contact</h2>
-      <!-- The @ is entity-encoded on purpose: Cloudflare Email Address Obfuscation rewrites literal mailto addresses into /cdn-cgi/l/email-protection links that render as "[email protected]" without JS. Keep the &#64; if you edit this. -->
-      <p>Corrections, program updates and partnership questions: <a href="mailto:wildbill&#64;wildbillsproplans.com">wildbill&#64;wildbillsproplans.com</a>. We answer corrections first.</p>
+      <!-- The @ is entity-encoded on purpose: Cloudflare Email Address Obfuscation rewrites literal mailto addresses into /cdn-cgi/l/email-protection links. The colon and @ are entity-encoded so the browser still resolves a normal mailto while the scraper does not recognise it. Keep the entities if you edit this. -->
+      <p>Corrections, program updates and partnership questions: <a href="mailto&#58;wildbill&#64;wildbillsproplans.com">wildbill&#64;wildbillsproplans.com</a>. We answer corrections first.</p>
       <p class="tiny muted">This site stores only a theme preference and a comparison list in your browser's localStorage. Outbound affiliate clicks are counted first-party in aggregate on Cloudflare — no cookies, no IP addresses stored, no third-party analytics or advertising pixels. Affiliate vendors set their own cookies after you click through to them.</p>
     </div>
   </section>
