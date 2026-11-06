@@ -656,3 +656,39 @@ dialog#compareDialog::backdrop { background: rgba(3, 6, 12, .72); backdrop-filte
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
 }
+
+/* ---------- Analytics consent ---------- */
+.consent {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 90;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .9rem 1.5rem;
+  padding: 1rem clamp(1rem, 4vw, 1.75rem);
+  background: var(--surface-2);
+  border-top: 1px solid var(--line-strong);
+  box-shadow: 0 -20px 50px -30px rgba(0, 0, 0, .8);
+}
+.consent__text { margin: 0; max-width: 68ch; font-size: .82rem; line-height: 1.55; color: var(--text-2); }
+.consent__actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-left: auto; }
+.consent__actions .btn { white-space: nowrap; }
+.linklike {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+@media (max-width: 560px) {
+  .consent { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+  .consent__actions { width: 100%; }
+  .consent__actions .btn { flex: 1; text-align: center; }
+}
