@@ -217,7 +217,7 @@ The site is a static multi-page build, so the SEO surface is files in the repo r
 
 - `robots.txt` — allows everything except `/api/` and `/clicks`, and points at the sitemap.
 - `sitemap.xml` — the 12 indexable URLs with `lastmod`. Regenerate it whenever a page is added or renamed.
-- **Canonicals** — every indexable page declares an absolute canonical. All of them, plus `og:url`, the JSON-LD `url`/`item` values and the sitemap, use the base `https://compareai.wildbillsproplans.com`. If you attach a custom domain, change that one base everywhere (a find/replace over the HTML heads, `sitemap.xml` and `robots.txt`) before deploying.
+- **Canonicals** — every indexable page declares an absolute canonical. All of them, plus `og:url`, the JSON-LD `url`/`item` values and the sitemap, use the base `https://compareai.wildbillsproplans.com`, which is the custom domain attached to the Pages project. `compareai-e9i.pages.dev` still serves the site but canonicalises to the domain. If the domain ever changes, replace that one base in the HTML heads, `sitemap.xml`, `robots.txt` and this file before deploying.
 - **Structured data** — `Organization` + `WebSite` on the home page, `BreadcrumbList` on every page with crumbs, `ItemList` on the six category pages, `FAQPage` generated from the visible `<details>` blocks, `AboutPage` on about, `Article` on the three guides.
 - **Social cards** — one shared 1200×630 `assets/img/og.png` is referenced by `og:image` and `twitter:image`.
 - **Noindex** — `404.html` and `clicks.html` carry `noindex` meta; `/clicks` and `/api/*` also send `X-Robots-Tag`.
