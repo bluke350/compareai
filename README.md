@@ -222,4 +222,4 @@ The site is a static multi-page build, so the SEO surface is files in the repo r
 - **Social cards** — one shared 1200×630 `assets/img/og.png` is referenced by `og:image` and `twitter:image`.
 - **Noindex** — `404.html` and `clicks.html` carry `noindex` meta; `/clicks` and `/api/*` also send `X-Robots-Tag`.
 
-Pages are canonicalised with the `.html` extension, which is what internal links and the sitemap use. Extensionless duplicates (`/writing-tools`) therefore consolidate to `/writing-tools.html` via the canonical rather than a redirect.
+Cloudflare Pages 308-redirects `/writing-tools.html` to `/writing-tools`, so the extensionless URL is the canonical one. Internal links, canonicals, `og:url`, JSON-LD `url` values and the sitemap all use it — linking to `.html` directly would put a redirect in front of every visit.

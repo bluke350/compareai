@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://compareai-e9i.pages.dev/about</loc>
+    <lastmod>2026-11-06</lastmod>
+  </url>
+  <url>
+    <loc>https://compareai-e9i.pages.dev/coding-tools</loc>
+    <lastmod>2026-11-06</lastmod>
+  </url>
+  <url>
+    <loc>https://compareai-e9i.pages.dev/elevenlabs-vs-murf</loc>
+    <lastmod>2026-11-06</lastmod>
+  </url>
+  <url>
+    <loc>https://compareai-e9i.pages.dev/image-generators</loc>
+    <lastmod>2026-11-06</lastmod>
+  </url>
+  <url>
     <loc>https://compareai-e9i.pages.dev/</loc>
     <lastmod>2026-11-06</lastmod>
   </url>
   <url>
-    <loc>https://compareai-e9i.pages.dev/writing-tools.html</loc>
+    <loc>https://compareai-e9i.pages.dev/jasper-vs-writesonic</loc>
     <lastmod>2026-11-06</lastmod>
   </url>
   <url>
-    <loc>https://compareai-e9i.pages.dev/image-generators.html</loc>
+    <loc>https://compareai-e9i.pages.dev/monetize</loc>
     <lastmod>2026-11-06</lastmod>
   </url>
   <url>
-    <loc>https://compareai-e9i.pages.dev/video-tools.html</loc>
+    <loc>https://compareai-e9i.pages.dev/seo-tools</loc>
     <lastmod>2026-11-06</lastmod>
   </url>
   <url>
-    <loc>https://compareai-e9i.pages.dev/voice-tools.html</loc>
+    <loc>https://compareai-e9i.pages.dev/synthesia-vs-heygen</loc>
     <lastmod>2026-11-06</lastmod>
   </url>
   <url>
-    <loc>https://compareai-e9i.pages.dev/coding-tools.html</loc>
+    <loc>https://compareai-e9i.pages.dev/video-tools</loc>
     <lastmod>2026-11-06</lastmod>
   </url>
   <url>
-    <loc>https://compareai-e9i.pages.dev/seo-tools.html</loc>
+    <loc>https://compareai-e9i.pages.dev/voice-tools</loc>
     <lastmod>2026-11-06</lastmod>
   </url>
   <url>
-    <loc>https://compareai-e9i.pages.dev/jasper-vs-writesonic.html</loc>
-    <lastmod>2026-11-06</lastmod>
-  </url>
-  <url>
-    <loc>https://compareai-e9i.pages.dev/synthesia-vs-heygen.html</loc>
-    <lastmod>2026-11-06</lastmod>
-  </url>
-  <url>
-    <loc>https://compareai-e9i.pages.dev/elevenlabs-vs-murf.html</loc>
-    <lastmod>2026-11-06</lastmod>
-  </url>
-  <url>
-    <loc>https://compareai-e9i.pages.dev/about.html</loc>
-    <lastmod>2026-11-06</lastmod>
-  </url>
-  <url>
-    <loc>https://compareai-e9i.pages.dev/monetize.html</loc>
+    <loc>https://compareai-e9i.pages.dev/writing-tools</loc>
     <lastmod>2026-11-06</lastmod>
   </url>
 </urlset>
