@@ -54,6 +54,7 @@ export async function onRequestGet({ request, env }) {
   let total = 0;
   let monetised = 0;
   let fallback = 0;
+  let program = 0;
   let first = null;
   let last = null;
 
@@ -67,11 +68,14 @@ export async function onRequestGet({ request, env }) {
       fallback: num(raw.fallback),
       unknown: num(raw.unknown)
     };
-    const earnable = counts.live + counts.program;
+    /* Only a configured tracking link can actually earn. An affiliate
+       application page ("program") is a useful click but pays nothing. */
+    const earnable = counts.live;
 
     total += record.n;
     monetised += earnable;
     fallback += counts.fallback;
+    program += counts.program;
 
     const bucket = categories[category] || (categories[category] = { clicks: 0, monetised: 0 });
     bucket.clicks += record.n;
@@ -84,6 +88,7 @@ export async function onRequestGet({ request, env }) {
       clicks: record.n,
       monetised: earnable,
       fallback: counts.fallback,
+      program: counts.program,
       counts: counts,
       category: category,
       last: record.last || null,
@@ -98,8 +103,9 @@ export async function onRequestGet({ request, env }) {
     total: total,
     monetised: monetised,
     fallback: fallback,
+    program: program,
     /* Clicks recorded before the split existed, plus any malformed payload. */
-    untagged: Math.max(0, total - monetised - fallback),
+    untagged: Math.max(0, total - monetised - fallback - program),
     toolsCounted: tools.length,
     first: first,
     last: last,
