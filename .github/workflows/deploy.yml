@@ -35,3 +35,32 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: c2c7597a69876428e89e4b3a3e7eabf2
           command: pages deploy . --project-name compareai --branch main --commit-dirty=true
+
+      # Only after a real deployment: pinging URLs that are not live yet would
+      # teach the engines that this sitemap contains 404s.
+      - name: Submit sitemap URLs to IndexNow
+        if: steps.check.outputs.ready == 'true'
+        run: |
+          set -uo pipefail
+          key_file=$(ls -1 | grep -E '^[0-9a-f]{32}\.txt$' | head -1 || true)
+          if [ -z "$key_file" ]; then
+            echo "No IndexNow key file — skipping."
+            exit 0
+          fi
+          python3 - "$key_file" <<'PY' > /tmp/indexnow.json
+          import json, pathlib, re, sys
+          key = pathlib.Path(sys.argv[1]).read_text().strip()
+          locs = re.findall(r"<loc>(.*?)</loc>", pathlib.Path("sitemap.xml").read_text())
+          print(json.dumps({
+              "host": "compareai.wildbillsproplans.com",
+              "key": key,
+              "keyLocation": "https://compareai.wildbillsproplans.com/%s.txt" % key,
+              "urlList": locs,
+          }))
+          PY
+          echo "Submitting $(grep -o '"http' /tmp/indexnow.json | wc -l) URLs to IndexNow."
+          curl -sS -o /tmp/indexnow.out -w 'IndexNow HTTP %{http_code}\n' \
+            -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            --data @/tmp/indexnow.json || true
+          cat /tmp/indexnow.out || true

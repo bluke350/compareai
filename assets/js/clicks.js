@@ -80,19 +80,35 @@
       ? (topCategory.category === 'unknown' ? 'Unattributed' : topCategory.category)
       : '—';
     $('#statLast').textContent = when(data.last);
+
+    var monetised = typeof data.monetised === 'number' ? data.monetised : null;
+    var monetisedEl = $('#statMonetised');
+    if (monetisedEl) {
+      if (monetised === null) {
+        monetisedEl.textContent = '—';
+      } else {
+        var share = data.total ? Math.round((monetised / data.total) * 100) : 0;
+        monetisedEl.textContent = monetised.toLocaleString('en-US') + (data.total ? ' · ' + share + '%' : '');
+      }
+    }
     statusEl.textContent = 'Updated ' + new Date().toLocaleTimeString('en-US');
 
     var max = data.tools.length ? data.tools[0].clicks : 0;
     $('#toolRows').innerHTML = data.tools.map(function (t) {
       var pct = max ? Math.max(2, Math.round((t.clicks / max) * 100)) : 0;
+      var earnable = typeof t.monetised === 'number' ? t.monetised : null;
+      var earnCell = earnable === null
+        ? '<span class="muted">—</span>'
+        : earnable.toLocaleString('en-US') + ' <span class="tiny muted">of ' + t.clicks.toLocaleString('en-US') + '</span>';
       return '<tr>' +
         '<td class="tool-name">' + esc(toolName(t.slug)) + '<small>' + esc(t.slug) + '</small></td>' +
         '<td>' + esc(toolCategory(t.slug)) + '</td>' +
         '<td class="num">' + t.clicks.toLocaleString('en-US') + '</td>' +
+        '<td class="num">' + earnCell + '</td>' +
         '<td style="min-width:120px"><span class="share-bar" style="width:' + pct + '%"></span></td>' +
         '<td class="num">' + esc(when(t.last)) + '</td>' +
         '</tr>';
-    }).join('') || '<tr><td colspan="5" class="muted">No clicks recorded yet. Open a comparison page and use a Visit button.</td></tr>';
+    }).join('') || '<tr><td colspan="6" class="muted">No clicks recorded yet. Open a comparison page and use a Visit button.</td></tr>';
 
     var catTotal = data.categories.reduce(function (sum, c) { return sum + c.clicks; }, 0);
     var labels = {
@@ -101,8 +117,9 @@
     };
     $('#catRows').innerHTML = data.categories.map(function (c) {
       var share = catTotal ? Math.round((c.clicks / catTotal) * 100) : 0;
+      var earnable = typeof c.monetised === 'number' ? ' · ' + c.monetised.toLocaleString('en-US') + ' earnable' : '';
       return '<tr><td>' + esc(labels[c.category] || c.category) + '</td>' +
-        '<td class="num">' + c.clicks.toLocaleString('en-US') + '</td>' +
+        '<td class="num">' + c.clicks.toLocaleString('en-US') + '<span class="tiny muted">' + esc(earnable) + '</span></td>' +
         '<td class="num">' + share + '%</td></tr>';
     }).join('') || '<tr><td colspan="3" class="muted">Nothing yet.</td></tr>';
 

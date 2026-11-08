@@ -11,7 +11,7 @@
 <link rel="icon" href="/assets/img/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <script src="assets/js/data.js"></script>
-<script src="assets/js/clicks.js" defer></script>
+<script src="assets/js/clicks.js?v=20261108" defer></script>
 
 <!--seo:meta-->
 <meta name="robots" content="noindex, nofollow">
@@ -57,6 +57,7 @@
       <div class="stat-grid">
         <div class="stat stat--accent"><strong id="statTotal">0</strong><span>Total clicks</span></div>
         <div class="stat"><strong id="statTools">0</strong><span>Tools clicked</span></div>
+        <div class="stat stat--accent"><strong id="statMonetised">—</strong><span>Earnable clicks</span></div>
         <div class="stat"><strong id="statCategory">—</strong><span>Top category</span></div>
         <div class="stat"><strong id="statLast">—</strong><span>Last click</span></div>
       </div>
@@ -75,7 +76,7 @@
 
       <div class="table-wrap">
         <table class="compare prog-table">
-          <thead><tr><th scope="col">Tool</th><th scope="col">Category</th><th scope="col">Clicks</th><th scope="col">Share</th><th scope="col">Last click</th></tr></thead>
+          <thead><tr><th scope="col">Tool</th><th scope="col">Category</th><th scope="col">Clicks</th><th scope="col">Earnable</th><th scope="col">Share</th><th scope="col">Last click</th></tr></thead>
           <tbody id="toolRows"></tbody>
         </table>
       </div>
@@ -90,7 +91,7 @@
         </table>
       </div>
 
-      <p class="tiny muted" style="margin-top:1rem">Counts are aggregate only: no cookies, no IP addresses, no user identifiers. A click is recorded whether the button points at a live affiliate link or the vendor fallback — use the <code>data-aff-status</code> marker in <code>app.js</code> if you later want to split those.</p>
+      <p class="tiny muted" style="margin-top:1rem">Counts are aggregate only: no cookies, no IP addresses, no user identifiers. Each click is also tagged with what the button pointed at — a configured affiliate link or affiliate landing page counts as <b>earnable</b>, a vendor fallback does not. <b>Earnable clicks</b> is therefore the number that can actually produce commission; the gap against <b>Total clicks</b> is traffic you sent for free.</p>
     </div>
   </section>
 </main>

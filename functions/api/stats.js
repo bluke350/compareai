@@ -4,7 +4,8 @@
    Requires the STATS_KEY secret, sent as the x-stats-key header (the
    dashboard stores it in sessionStorage only; it is never in the HTML).
 
-   Responds with per-tool and per-category totals, sorted by clicks.
+   Responds with per-tool and per-category totals, sorted by clicks, plus a
+   monetised / fallback split so a dead-end click is not mistaken for revenue.
    ========================================================================== */
 
 function json(data, status) {
@@ -15,6 +16,10 @@ function json(data, status) {
       'cache-control': 'no-store'
     }
   });
+}
+
+function num(value) {
+  return typeof value === 'number' && isFinite(value) ? value : 0;
 }
 
 function safeEqual(a, b) {
@@ -47,19 +52,39 @@ export async function onRequestGet({ request, env }) {
   const tools = [];
   const categories = {};
   let total = 0;
+  let monetised = 0;
+  let fallback = 0;
   let first = null;
   let last = null;
 
   records.forEach(({ slug, record }) => {
     if (!record || typeof record.n !== 'number') return;
     const category = record.cat || 'unknown';
+    const raw = record.counts && typeof record.counts === 'object' ? record.counts : {};
+    const counts = {
+      live: num(raw.live),
+      program: num(raw.program),
+      fallback: num(raw.fallback),
+      unknown: num(raw.unknown)
+    };
+    const earnable = counts.live + counts.program;
+
     total += record.n;
-    categories[category] = (categories[category] || 0) + record.n;
+    monetised += earnable;
+    fallback += counts.fallback;
+
+    const bucket = categories[category] || (categories[category] = { clicks: 0, monetised: 0 });
+    bucket.clicks += record.n;
+    bucket.monetised += earnable;
+
     if (record.first && (!first || record.first < first)) first = record.first;
     if (record.last && (!last || record.last > last)) last = record.last;
     tools.push({
       slug: slug,
       clicks: record.n,
+      monetised: earnable,
+      fallback: counts.fallback,
+      counts: counts,
       category: category,
       last: record.last || null,
       page: record.page || null
@@ -71,12 +96,20 @@ export async function onRequestGet({ request, env }) {
   return json({
     ok: true,
     total: total,
+    monetised: monetised,
+    fallback: fallback,
+    /* Clicks recorded before the split existed, plus any malformed payload. */
+    untagged: Math.max(0, total - monetised - fallback),
     toolsCounted: tools.length,
     first: first,
     last: last,
     tools: tools,
     categories: Object.keys(categories)
-      .map((name) => ({ category: name, clicks: categories[name] }))
+      .map((name) => ({
+        category: name,
+        clicks: categories[name].clicks,
+        monetised: categories[name].monetised
+      }))
       .sort((a, b) => b.clicks - a.clicks)
   });
 }

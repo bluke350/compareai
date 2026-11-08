@@ -2,13 +2,21 @@
    POST /api/click  —  count one outbound affiliate click
    --------------------------------------------------------------------------
    Called by assets/js/app.js via navigator.sendBeacon. Stores one KV entry
-   per tool:  t:<slug> -> { n, cat, page, first, last }
+   per tool:  t:<slug> -> { n, cat, page, first, last, counts }
+
+   counts splits the total by what the button actually pointed at, so a
+   monetised click can be told apart from an unmonetised vendor fallback:
+     live      configured affiliate tracking link
+     program   affiliate application/landing page (no tracking yet)
+     fallback  vendor site, no money can change hands
+     unknown   legacy payload with no status
 
    No cookies, no IP addresses, no user ids. One write per click, which keeps
    the free KV tier (1,000 writes/day) comfortable for a new site.
    ========================================================================== */
 
 const CATEGORIES = new Set(['writing', 'image', 'video', 'voice', 'coding', 'seo']);
+const STATUSES = new Set(['live', 'program', 'fallback']);
 
 function json(data, status) {
   return new Response(JSON.stringify(data), {
@@ -34,6 +42,7 @@ export async function onRequestPost({ request, env }) {
   const slug = typeof body.s === 'string' ? body.s : '';
   const category = typeof body.c === 'string' ? body.c : '';
   const page = typeof body.p === 'string' ? body.p : '';
+  const status = typeof body.st === 'string' && STATUSES.has(body.st) ? body.st : 'unknown';
 
   if (!/^[a-z0-9-]{2,48}$/.test(slug)) return json({ ok: false, error: 'bad_slug' }, 400);
   if (category && !CATEGORIES.has(category)) return json({ ok: false, error: 'bad_category' }, 400);
@@ -53,6 +62,9 @@ export async function onRequestPost({ request, env }) {
   record.last = now;
   if (category) record.cat = category;
   if (page) record.page = page.slice(0, 120);
+
+  if (!record.counts || typeof record.counts !== 'object') record.counts = {};
+  record.counts[status] = (typeof record.counts[status] === 'number' ? record.counts[status] : 0) + 1;
 
   await env.CLICKS.put(key, JSON.stringify(record));
   return json({ ok: true }, 202);
